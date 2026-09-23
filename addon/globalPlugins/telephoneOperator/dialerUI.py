@@ -143,7 +143,7 @@ class PhoneDialerDialog(wx.Dialog):
                 "3. Keep the Telephone Operator page open in your "
                 "phone's browser.\n\n"
                 "4. On the computer, select or focus a phone number "
-                "and press NVDA+Alt+C or assigned shortcut.\n\n"
+                "and press NVDA+Alt+C or assigned shortcut. Allow the Windows Firewall/Network access if prompted first time.\n\n"
                 "5. The number will appear on your phone. Verify it "
                 "and press CALL."
             )

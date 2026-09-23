@@ -9,8 +9,8 @@ def onInstall():
         "Tools > Telephone Operator. From there you can start or stop "
         "Telephone Operator and open the instructions.\n\n"
         "Default keyboard shortcuts:\n"
-        "NVDA+Shift+D: Send the selected or focused phone number.\n"
-        "NVDA+Shift+T: Start Telephone Operator. Press twice to stop it.\n\n"
+        "NVDA+Alt+C: Send the selected or focused phone number.\n"
+        "NVDA+Alt+Z: Start Telephone Operator. Press twice to stop it.\n\n"
         "You can change these shortcuts from "
         "NVDA > Preferences > Input Gestures > Telephone Operator."
     )

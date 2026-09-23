@@ -2,6 +2,7 @@ import os
 import sys
 import ui
 import logHandler
+import webbrowser
 
 PLUGIN_PATH = os.path.dirname(__file__)
 
@@ -46,7 +47,7 @@ CALL_TIMEOUT = 2
 
 log = logHandler.log
 
-from dialerUI import PhoneDialerDialog, InstructionsDialog
+from dialerUI import PhoneDialerDialog
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
@@ -75,7 +76,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
         self.instructionsMenuItem = self.telephoneOperatorMenu.Append(
             wx.ID_ANY,
-            "Instructions"
+            "Detailed Instructions"
         )
 
         # ---------------------------------------------------------
@@ -277,21 +278,30 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
         try:
 
-            dialog = InstructionsDialog(
-                gui.mainFrame
+            readmePath = os.path.abspath(
+                os.path.join(
+                    PLUGIN_PATH,
+                    "..",
+                    "..",
+                    "doc",
+                    "en",
+                    "readme.html"
+                )
             )
 
-            dialog.ShowModal()
-            dialog.Destroy()
+            webbrowser.open(
+                "file:///" + readmePath.replace("\\", "/")
+            )
 
         except Exception:
 
             log.exception(
-                "Telephone Operator: Failed to show instructions"
+                "Telephone Operator: Unable to open detailed instructions"
             )
 
-            ui.message("Unable to open instructions")
-
+            ui.message(
+                "Unable to open detailed instructions"
+            )
 
     def _is_server_available(self):
         """
@@ -1129,6 +1139,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 
     __gestures = {
-        "kb:NVDA+shift+D": "callNumber",
-        "kb:NVDA+shift+T": "startServer",
+        "kb:NVDA+alt+C": "callNumber",
+        "kb:NVDA+alt+Z": "startServer",
     }

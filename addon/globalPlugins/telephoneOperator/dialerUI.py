@@ -1,3 +1,4 @@
+import os
 import ui
 import logHandler
 import wx
@@ -61,7 +62,7 @@ class PhoneDialerDialog(wx.Dialog):
                 "Telephone Operator helps you make calls without "
                 "manually typing phone numbers on your phone.\n"
                 "Select or focus a phone number on your computer and "
-                "press NVDA+Shift+D or assigned shortcut. The number is sent to your phone, "
+                "press NVDA+Alt+C or assigned shortcut. The number is sent to your phone, "
                 "where you can verify it and press CALL.\n\n"
                 "Use the address below to connect your phone."
             )
@@ -136,13 +137,13 @@ class PhoneDialerDialog(wx.Dialog):
             panel,
             label=(
                 "1. Connect your computer and phone to the same "
-                "Wi-Fi or network.\n\n"
+                "Wi-Fi network or you can use your phone's personal hotspot.\n\n"
                 "2. Open the Telephone Operator address above on "
                 "your phone, or scan the QR code.\n\n"
                 "3. Keep the Telephone Operator page open in your "
                 "phone's browser.\n\n"
                 "4. On the computer, select or focus a phone number "
-                "and press NVDA+Shift+D or assigned shortcut.\n\n"
+                "and press NVDA+Alt+C or assigned shortcut.\n\n"
                 "5. The number will appear on your phone. Verify it "
                 "and press CALL."
             )
@@ -183,6 +184,15 @@ class PhoneDialerDialog(wx.Dialog):
             "Show QR Code"
         )
 
+        self.detailedInstructionsButton = wx.Button(
+            panel,
+            label="&Detailed Instructions"
+        )
+
+        self.detailedInstructionsButton.SetName(
+               "Detailed Instructions"
+        )
+
         self.closeButton = wx.Button(
             panel,
             label="C&lose"
@@ -201,6 +211,13 @@ class PhoneDialerDialog(wx.Dialog):
 
         buttonSizer.Add(
             self.qrButton,
+            0,
+            wx.RIGHT,
+            10
+        )
+
+        buttonSizer.Add(
+            self.detailedInstructionsButton,
             0,
             wx.RIGHT,
             10
@@ -232,6 +249,11 @@ class PhoneDialerDialog(wx.Dialog):
         self.qrButton.Bind(
             wx.EVT_BUTTON,
             self.onShowQR
+        )
+
+        self.detailedInstructionsButton.Bind(
+            wx.EVT_BUTTON,
+            self.onDetailedInstructions
         )
 
         self.closeButton.Bind(
@@ -303,6 +325,39 @@ class PhoneDialerDialog(wx.Dialog):
             )
 
     # -------------------------------------------------------------
+    # DETAILED INSTRUCTIONS
+    # -------------------------------------------------------------
+
+    def onDetailedInstructions(self, event):
+
+        try:
+
+            readmePath = os.path.abspath(
+                os.path.join(
+                    os.path.dirname(__file__),
+                    "..",
+                    "..",
+                    "doc",
+                    "en",
+                    "readme.html"
+                )
+            )
+
+            webbrowser.open(
+                "file:///" + readmePath.replace("\\", "/")
+            )
+
+        except Exception:
+
+            log.exception(
+                "Telephone Operator: Unable to open detailed instructions"
+            )
+
+            ui.message(
+                "Unable to open detailed instructions"
+            )
+
+    # -------------------------------------------------------------
     # CLOSE
     # -------------------------------------------------------------
 
@@ -336,6 +391,12 @@ class PhoneDialerDialog(wx.Dialog):
             self.onShowQR(None)
             return
 
+        # Alt+D = Detailed Instructions
+        if event.AltDown() and key in (ord("D"), ord("d")):
+
+            self.onDetailedInstructions(None)
+            return
+
         # Alt+L = Close
         if event.AltDown() and key in (ord("L"), ord("l")):
 
@@ -345,154 +406,3 @@ class PhoneDialerDialog(wx.Dialog):
         event.Skip()
 
 
-class InstructionsDialog(wx.Dialog):
-    """Display instructions for using Telephone Operator."""
-
-    def __init__(self, parent):
-
-        super().__init__(
-            parent,
-            title="Telephone Operator Instructions",
-            size=(700, 600)
-        )
-
-        panel = wx.Panel(self)
-
-        mainSizer = wx.BoxSizer(wx.VERTICAL)
-
-        # ---------------------------------------------------------
-        # TITLE
-        # ---------------------------------------------------------
-
-        title = wx.StaticText(
-            panel,
-            label="Telephone Operator Instructions"
-        )
-
-        title.SetFont(
-            wx.Font(
-                14,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_BOLD
-            )
-        )
-
-        mainSizer.Add(
-            title,
-            0,
-            wx.ALL,
-            15
-        )
-
-        # ---------------------------------------------------------
-        # INSTRUCTIONS
-        # ---------------------------------------------------------
-
-        instructions = wx.TextCtrl(
-            panel,
-            value=(
-                "1. Start Telephone Operator from the NVDA Tools "
-                "menu or by using the assigned shortcut.\n\n"
-
-                "2. Make sure your computer and phone are connected "
-                "to the same Wi-Fi or network.\n\n"
-
-                "3. On your phone, open the Telephone Operator address "
-                "shown by the add-on. You can also scan the QR code.\n\n"
-
-                "4. Keep the Telephone Operator page open in your "
-                "phone's browser.\n\n"
-
-                "5. On the computer, select or focus the phone number "
-                "you want to call.\n\n"
-
-                "6. Press NVDA+Shift+D or assigned shortcut to send the number to your phone.\n\n"
-
-                "7. The number will appear on the Telephone Operator "
-                "page on your phone.\n\n"
-
-                "8. Verify the number and press the CALL button "
-                "on your phone.\n\n"
-
-                "9. When you have finished using Telephone Operator, "
-                "stop it from the NVDA Tools menu or by using "
-                "the assigned shortcut."
-            ),
-            style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_WORDWRAP
-        )
-
-        instructions.SetName(
-            "Telephone Operator Instructions"
-        )
-
-        mainSizer.Add(
-            instructions,
-            1,
-            wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM,
-            15
-        )
-
-        # ---------------------------------------------------------
-        # CLOSE BUTTON
-        # ---------------------------------------------------------
-
-        closeButton = wx.Button(
-            panel,
-            label="C&lose"
-        )
-
-        closeButton.SetName(
-            "Close"
-        )
-
-        mainSizer.Add(
-            closeButton,
-            0,
-            wx.ALIGN_CENTER | wx.ALL,
-            15
-        )
-
-        panel.SetSizer(mainSizer)
-
-        # ---------------------------------------------------------
-        # EVENTS
-        # ---------------------------------------------------------
-
-        closeButton.Bind(
-            wx.EVT_BUTTON,
-            self.onClose
-        )
-
-        self.Bind(
-            wx.EVT_CHAR_HOOK,
-            self.onKeyPress
-        )
-
-        # ---------------------------------------------------------
-        # INITIAL FOCUS
-        # ---------------------------------------------------------
-
-        instructions.SetFocus()
-
-        self.Centre()
-
-    def onClose(self, event):
-
-        self.EndModal(wx.ID_CLOSE)
-
-    def onKeyPress(self, event):
-
-        key = event.GetKeyCode()
-
-        if key == wx.WXK_ESCAPE:
-
-            self.EndModal(wx.ID_CLOSE)
-            return
-
-        if event.AltDown() and key in (ord("L"), ord("l")):
-
-            self.EndModal(wx.ID_CLOSE)
-            return
-
-        event.Skip()

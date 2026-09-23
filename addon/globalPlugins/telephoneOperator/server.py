@@ -96,9 +96,33 @@ body {font-family: Arial;text-align: center;padding: 20px;background: #f2f2f2;}
 button {font-size: 26px;padding: 18px 35px;border-radius: 10px;border: none;background: #28a745;color: white;margin: 10px;}
 button:focus {outline: 3px solid #ff9800;}
 .toggle {background: #007AFF;}
-.history {margin-top: 20px;text-align: left;}
-.history-item {padding: 10px;border-bottom: 1px solid #ccc;}
-a {text-decoration: none;font-size: 20px;}
+.history {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.history-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.history-item a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #0000EE;
+}
+
+.history h3 {
+    color: inherit;
+}
+
+.dark .history-item {
+    border-bottom-color: #555;
+}
+
+.dark .history-item a {
+    color: #66B3FF;
+}
 </style>
 </head>
 <body>

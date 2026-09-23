@@ -39,10 +39,10 @@ addon_info = AddonInfo(
 	addon_author="Ramesh Patil",
 
 	# Documentation/support URL
-	addon_url=None,
+	addon_url="https://github.com/rameshpatil7721/Telephone-Operator",
 
 	# Source code repository URL
-	addon_sourceURL=None,
+	addon_sourceURL="https://github.com/rameshpatil7721/Telephone-Operator",
 
 	# Documentation file name
 	addon_docFileName="readme.html",
@@ -95,7 +95,9 @@ baseLanguage: str = "en"
 # If you need to add support for markup such as tables, fill out the below list.
 # Extensions string must be of the form "markdown.extensions.extensionName"
 # e.g. "markdown.extensions.tables" to add tables.
-markdownExtensions: list[str] = []
+markdownExtensions: list[str] = [
+    "markdown.extensions.tables",
+]
 
 # Custom braille translation tables
 # If your add-on includes custom braille tables (most will not), fill out this dictionary.

@@ -4,6 +4,12 @@ Telephone Operator is an NVDA add-on that helps users send phone numbers from th
 
 It can be useful for people who regularly work with phone numbers on a computer, including **banking and office staff, customer-service and call-centre users, data-entry operators, administrative staff, and other professionals** who handle phone numbers in Excel, Word, web pages, Notepad, or similar applications.
 
+## Download
+
+**[Download Telephone Operator 1.0.0](https://github.com/rameshpatil7721/Telephone-Operator/releases/download/v1.0.0/telephoneOperator-1.0.0.nvda-addon)**
+
+For release notes and previous versions, visit the [GitHub Releases](https://github.com/rameshpatil7721/Telephone-Operator/releases) page.
+
 ## How It Works
 
 Telephone Operator runs a small local web server on your computer.
@@ -182,12 +188,10 @@ If necessary, stop Telephone Operator and start it again.
 
 ## Project and Contact
 
-**GitHub:**
-
-https://github.com/rameshpatil7721/Telephone-Operator
+**GitHub:** [Telephone Operator on GitHub](https://github.com/rameshpatil7721/Telephone-Operator)
 
 **Author:** Ramesh Patil
 
-**Email:** rameshpatil.rp019@gmail.com
+**Email:** [rameshpatil.rp019@gmail.com](mailto:rameshpatil.rp019@gmail.com)
 
 Feedback, suggestions, and bug reports are welcome.

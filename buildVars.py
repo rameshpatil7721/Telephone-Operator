@@ -51,7 +51,7 @@ addon_info = AddonInfo(
 	addon_minimumNVDAVersion="2026.1",
 
 	# Latest NVDA version actually tested
-	addon_lastTestedNVDAVersion="2026.1.1",
+	addon_lastTestedNVDAVersion="2026.2.0",
 
 	# Stable release
 	addon_updateChannel=None,

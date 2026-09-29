@@ -24,7 +24,12 @@ addon_info = AddonInfo(
 		"typing phone numbers on their phone. Select or focus a phone number "
 		"on the computer and use the NVDA shortcut to send the number to a "
 		"phone connected to the same network. Verify the number on the phone "
-		"and press CALL."
+		"and press CALL.\n\n"
+        "To start: Press NVDA+Alt+Z or Go to NVDA menu > Tools > Telephone Operator > Start Telephone Operator.\n"
+        "On your phone: Open the displayed address in your browser or scan the QR code shown in the dialog.\n"
+        "To send a number: Press NVDA+Alt+C after selecting or focusing the phone number.\n"
+        "The number will appear on your Phone. Verify number and Press Call button.\n"
+        "To stop: Press NVDA+Alt+Z or Go to NVDA menu > Tools > Telephone Operator > Stop Telephone Operator."
 	),
 
 	# Version
@@ -57,7 +62,7 @@ addon_info = AddonInfo(
 	addon_updateChannel=None,
 
 	# License
-	addon_license="GPL-2.0-or-later",
+	addon_license="GPL v2",
 
 	# License URL
 	addon_licenseURL="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
